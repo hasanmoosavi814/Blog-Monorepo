@@ -45,12 +45,19 @@ type CommentEntity {
   createdAt: DateTime!
 }
 
+type AuthPayloadEntity {
+  id: String!
+  name: String!
+  avatar: String
+  accessToken: String!
+}
+
 type Query {
   posts: [Post!]!
 }
 
 type Mutation {
-  signIn(signInInput: SignInInput!): String!
+  signIn(signInInput: SignInInput!): AuthPayloadEntity!
   createUser(createUserInput: CreateUserInput!): User!
 }
 

@@ -1,4 +1,5 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
+import { AuthPayloadEntity } from "../entities/auth-entity";
 import { AuthService } from "../services/auth.service";
 import { SignInInput } from "../dto/signin.input";
 
@@ -6,9 +7,9 @@ import { SignInInput } from "../dto/signin.input";
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation(() => String)
+  @Mutation(() => AuthPayloadEntity)
   async signIn(@Args("signInInput") signInInput: SignInInput) {
     const user = await this.authService.validateLocalUser(signInInput);
-    return "Successful login!";
+    return await this.authService.login(user);
   }
 }
