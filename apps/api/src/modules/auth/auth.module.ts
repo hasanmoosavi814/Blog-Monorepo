@@ -1,10 +1,10 @@
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { PrismaService } from "../prisma/prisma.service";
 import { AuthResolver } from "./resolvers/auth.resolver";
+import { JwtStrategy } from "./strategy/jwt.strategy";
 import { AuthService } from "./services/auth.service";
 import { JwtModule } from "@nestjs/jwt";
 import { Module } from "@nestjs/common";
-import { JwtStrategy } from "./strategy/jwt.strategy";
 
 @Module({
   imports: [

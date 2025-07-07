@@ -1,8 +1,8 @@
 import { Resolver, Query, Context } from "@nestjs/graphql";
-import { PostService } from "../services/post.service";
-import { Post } from "../entities/post.entity";
-import { UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "src/common/guards/jwt-auth.guard";
+import { PostService } from "../services/post.service";
+import { UseGuards } from "@nestjs/common";
+import { Post } from "../entities/post.entity";
 
 @Resolver(() => Post)
 export class PostResolver {
