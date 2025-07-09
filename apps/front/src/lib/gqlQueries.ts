@@ -1,14 +1,15 @@
 import gql from "graphql-tag";
 
 export const GET_POSTS = gql`
-  query {
-    posts {
+  query posts($skip: Float, $take: Float) {
+    posts(skip: $skip, take: $take) {
       id
+      slug
       title
-      thumbnail
       content
       createdAt
-      slug
+      thumbnail
     }
+    postCount
   }
 `;
