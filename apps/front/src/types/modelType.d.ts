@@ -1,5 +1,5 @@
 export type post = {
-  id: number;
+  id: string;
   author: User;
   tags?: Tag[];
   slug: string;

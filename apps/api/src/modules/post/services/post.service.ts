@@ -18,4 +18,11 @@ export class PostService {
   async count() {
     return await this.prismaService.post.count();
   }
+
+  async findOne(id: string) {
+    return await this.prismaService.post.findFirst({
+      where: { id },
+      include: { author: true, tags: true },
+    });
+  }
 }
