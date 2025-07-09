@@ -1,0 +1,8 @@
+import { fetchGraphQL } from "./fetchGraphQL";
+import { GET_POSTS } from "./gqlQueries";
+import { print } from "graphql";
+
+export const fetchPosts = async () => {
+  const data = await fetchGraphQL(print(GET_POSTS));
+  return data.posts as Post[];
+};
