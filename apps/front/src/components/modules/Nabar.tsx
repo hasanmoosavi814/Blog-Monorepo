@@ -1,13 +1,40 @@
-import Link from "next/link";
+import { SignOutButton } from "./SignOutBtn";
+import { getSession } from "@/lib/session";
 
-const Navbar = () => {
+import SignInPanel from "../templates/SignInPanel";
+import Image from "next/image";
+import Link from "next/link";
+import UserDropdown from "./UserDropdown";
+
+const Navbar = async () => {
+  const session = await getSession();
+
   return (
     <>
-      <h1 className="text-2xl font-bold p-2">My Modern Blog</h1>
-      <div className="flex flex-col md:flex-row gap-2 ml-auto [&>a]:py-2 [&>a]:px-4 [&>a]:transition [&>a]:rounded-md [&>a:hover]:text-sky-100 [&>a:hover]:bg-sky-500">
+      <Link href="/" className="text-2xl font-bold p-2 block">
+        My Modern Blog
+      </Link>
+
+      <div
+        className="
+          flex 
+          gap-2 
+          flex-col 
+          ml-auto 
+          md:flex-row 
+          items-center
+          [&>a]:py-2 
+          [&>a]:px-4 
+          [&>a]:transition 
+          [&>a]:rounded-md 
+          [&>a]:text-gray-600
+          [&>a:hover]:bg-sky-500
+          [&>a:hover]:text-sky-100"
+      >
         <Link href={"/"}>Blog</Link>
         <Link href={"#about"}>About</Link>
         <Link href={"#contact"}>Contact</Link>
+        {session?.user ? <UserDropdown user={session.user} /> : <SignInPanel />}
       </div>
     </>
   );
