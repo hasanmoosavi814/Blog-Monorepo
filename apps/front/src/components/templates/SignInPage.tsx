@@ -2,10 +2,10 @@
 
 import { motion } from "framer-motion";
 
-import SignUpForm from "../modules/SignUpForm";
+import SignInForm from "../modules/SignInForm";
 import Link from "next/link";
 
-const SignUpPage = () => {
+const SignInPage = () => {
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
       {/* Left Side - Illustration */}
@@ -13,7 +13,7 @@ const SignUpPage = () => {
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
-        className="bg-gradient-to-br from-sky-100 to-indigo-200 flex items-center justify-center p-8"
+        className="bg-gradient-to-br from-indigo-100 to-sky-200 flex items-center justify-center p-8"
       >
         <motion.h1
           initial={{ y: 20, opacity: 0 }}
@@ -21,7 +21,7 @@ const SignUpPage = () => {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="text-4xl font-extrabold text-gray-700 text-center leading-snug"
         >
-          Join the community <br /> of lifelong learners 🌱
+          Welcome back <br /> to your learning journey 🚀
         </motion.h1>
       </motion.div>
 
@@ -34,23 +34,23 @@ const SignUpPage = () => {
       >
         <div className="max-w-md w-full mx-auto space-y-6">
           <div>
-            <h2 className="text-3xl font-bold text-gray-800">Create Account</h2>
+            <h2 className="text-3xl font-bold text-gray-800">Sign In</h2>
             <p className="text-sm text-gray-500 mt-1">
-              Already have an account?{" "}
+              Don’t have an account?{" "}
               <Link
-                href="/auth/signin"
+                href="/auth/signup"
                 className="text-blue-600 hover:underline"
               >
-                Log in
+                Create one
               </Link>
             </p>
           </div>
 
-          <SignUpForm />
+          <SignInForm />
         </div>
       </motion.div>
     </div>
   );
 };
 
-export default SignUpPage;
+export default SignInPage;

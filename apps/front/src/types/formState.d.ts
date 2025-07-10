@@ -13,3 +13,17 @@ export type SignUpFormState =
       message?: string;
     }
   | undefined;
+
+export type SignInFormState =
+  | {
+      data: {
+        email?: string;
+        password?: string;
+      };
+      error: {
+        email: string[];
+        password?: string[];
+      };
+      message?: string;
+    }
+  | undefined;
