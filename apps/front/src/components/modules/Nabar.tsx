@@ -1,10 +1,8 @@
-import { SignOutButton } from "./SignOutBtn";
 import { getSession } from "@/lib/session";
 
-import SignInPanel from "../templates/SignInPanel";
-import Image from "next/image";
-import Link from "next/link";
 import UserDropdown from "./UserDropdown";
+import SignInPanel from "../templates/SignInPanel";
+import Link from "next/link";
 
 const Navbar = async () => {
   const session = await getSession();
