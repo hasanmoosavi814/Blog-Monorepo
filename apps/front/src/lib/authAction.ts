@@ -3,10 +3,11 @@
 import { CREATE_USER_MUTATION, SIGN_IN_MUTATION } from "./gqlQueries";
 import { SignInFormSchema, SignUpFormSchema } from "./AuthSchemas";
 import { SignInFormState, SignUpFormState } from "@/types/formState";
+import { createSession } from "./session";
 import { fetchGraphQL } from "./fetchGraphQL";
 import { print } from "graphql";
 
-// ============= signUp Actions ================
+// ============= signUp Action ================
 export const signUp = async (
   state: SignUpFormState,
   formData: FormData
@@ -16,6 +17,7 @@ export const signUp = async (
     email: formData.get("email"),
     password: formData.get("password"),
   };
+
   const parsed = SignUpFormSchema.safeParse(rawValues);
   if (!parsed.success) {
     const fieldErrors = parsed.error.flatten().fieldErrors;
@@ -58,7 +60,7 @@ export const signUp = async (
   }
 };
 
-// ============= signIn Actions ================
+// ============= signIn Action ================
 export const signIn = async (
   state: SignInFormState,
   formData: FormData
@@ -67,6 +69,7 @@ export const signIn = async (
     email: formData.get("email"),
     password: formData.get("password"),
   };
+
   const parsed = SignInFormSchema.safeParse(rawValues);
   if (!parsed.success) {
     const fieldErrors = parsed.error.flatten().fieldErrors;
@@ -84,8 +87,17 @@ export const signIn = async (
   }
 
   try {
-    await fetchGraphQL(print(SIGN_IN_MUTATION), {
+    const res = await fetchGraphQL(print(SIGN_IN_MUTATION), {
       input: parsed.data,
+    });
+    const userData = res.signIn;
+    await createSession({
+      accessToken: userData.accessToken,
+      user: {
+        id: userData.id,
+        name: userData.name,
+        avatar: userData.avatar,
+      },
     });
 
     return {

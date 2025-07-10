@@ -11,13 +11,16 @@ type Props = {
 };
 
 const Home = async ({ searchParams }: Props) => {
+  // =============== Search Params ===================
   const resolvedSearchParams = await searchParams;
   const page = resolvedSearchParams?.page
     ? parseInt(resolvedSearchParams.page.toString(), 10)
     : 1;
 
+  // =============== Fetch Data ===================
   const { totalPosts, posts } = await fetchPosts({ page, pageSize: 10 });
 
+  // =============== Rendering ===================
   return (
     <main>
       <Hero />
