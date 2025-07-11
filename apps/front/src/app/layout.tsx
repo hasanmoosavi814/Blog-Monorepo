@@ -6,6 +6,7 @@ import NavbarContainer from "@/components/layouts/NavbarContainer";
 import Navbar from "@/components/modules/Nabar";
 
 import "./globals.css";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,11 +33,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavbarContainer>
-          <Toaster />
-          <Navbar />
-        </NavbarContainer>
-        {children}
+        <ReactQueryProvider>
+          <NavbarContainer>
+            <Toaster />
+            <Navbar />
+          </NavbarContainer>
+          {children}
+        </ReactQueryProvider>
       </body>
     </html>
   );

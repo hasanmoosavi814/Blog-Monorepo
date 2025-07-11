@@ -1,4 +1,4 @@
-const BACKEND_URL = process.env.BACKEND_URL;
+import { BACKEND_URL } from "@/utils/constant";
 
 export const fetchGraphQL = async (query: string, variables = {}) => {
   const response = await fetch(`${BACKEND_URL}/graphql`, {

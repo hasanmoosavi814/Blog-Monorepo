@@ -23,10 +23,11 @@ const PostDetail = ({ post }: Props) => {
       {/* Thumbnail */}
       <div className="overflow-hidden">
         <Image
+          priority
           unoptimized
-          alt={post.title}
           width={1200}
           height={500}
+          alt={post.title}
           src={post.thumbnail ?? "/default-thumbnail.jpg"}
           className="w-full h-64 object-cover transition-transform duration-500 hover:scale-105"
         />

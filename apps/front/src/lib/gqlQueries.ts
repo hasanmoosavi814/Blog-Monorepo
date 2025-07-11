@@ -51,3 +51,18 @@ export const SIGN_IN_MUTATION = gql`
     }
   }
 `;
+
+export const GET_POST_COMMENTS = gql`
+  query GetPostComments($postId: String!, $take: Int, $skip: Int) {
+    getPostComment(postId: $postId, take: $take, skip: $skip) {
+      id
+      content
+      createdAt
+      author {
+        name
+        avatar
+      }
+    }
+    postCommentCount(postId: $postId)
+  }
+`;
