@@ -1,26 +1,21 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import { SignInFormState } from "@/types/formState";
 import { useRouter } from "next/navigation";
 import { signIn } from "@/lib/authAction";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+import { SignInFormState } from "@/types/formState";
 import { toast } from "sonner";
-
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import SubmitButton from "../elements/SubmitButton";
 
 const SignInForm = () => {
-  // ================ Actions =================
   const [state, action] = useActionState<SignInFormState, FormData>(
     signIn,
     undefined
   );
-
-  // ================ Routers =================
   const router = useRouter();
 
-  // ================ Effect =================
   useEffect(() => {
     if (!state) return;
     if (
@@ -39,7 +34,6 @@ const SignInForm = () => {
     }
   }, [state, router]);
 
-  // ================ Rendering =================
   return (
     <form className="space-y-5" action={action}>
       <div>

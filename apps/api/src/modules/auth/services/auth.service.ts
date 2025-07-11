@@ -1,4 +1,5 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { CreateUserInput } from "src/modules/user/dto/user.input";
 import { AuthJwtPayload } from "src/common/types/auth-jwtPayload";
 import { PrismaService } from "src/modules/prisma/prisma.service";
 import { SignInInput } from "../dto/signin.input";
@@ -40,5 +41,20 @@ export class AuthService {
     if (!user) throw new UnauthorizedException("Invalid token: user not found");
     const currentUser = { id: user.id };
     return currentUser;
+  }
+
+  async validateGoogleUser(googleUser: CreateUserInput) {
+    const user = await this.prismaService.user.findUnique({
+      where: { email: googleUser.email },
+    });
+    if (user) {
+      const { password, ...authUser } = user;
+      return authUser;
+    }
+    const dbUser = await this.prismaService.user.create({
+      data: { ...googleUser },
+    });
+    const { password, ...authUser } = dbUser;
+    return authUser;
   }
 }
